@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/attractionFragment"
-        android:name="com.leodemo.taipei_tour.fragment.AttractionFragment"
+        android:name="com.leodemo.taipei_tour.fragment.attraction.AttractionFragment"
         android:label="AttractionFragment" />
 
 </navigation>

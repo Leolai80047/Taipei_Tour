@@ -9,5 +9,14 @@ data class AttractionResponse(
         val introduction: String,
         val address: String,
         val url: String,
-    )
+        private val images: List<ImageSrc>
+    ) {
+        data class ImageSrc(
+            val src: String,
+        )
+
+        fun getImage(): String? {
+            return images.firstOrNull()?.src
+        }
+    }
 }
