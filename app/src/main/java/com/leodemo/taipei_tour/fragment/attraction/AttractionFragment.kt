@@ -2,8 +2,10 @@ package com.leodemo.taipei_tour.fragment.attraction
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.FragmentAttractionBinding
@@ -25,9 +27,13 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
         initObserver()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         attractionAdapter = null
+    }
+
+    override fun initToolbar() {
+        binding.toolbar.tvTitle.text = getString(R.string.app_name)
     }
 
     private fun initView() {
@@ -38,8 +44,14 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
     }
 
     private fun initObserver() {
-        activityViewModel.attractionList.observe(viewLifecycleOwner) {
-            attractionAdapter?.submit(it)
+        activityViewModel.attractionList.observe(viewLifecycleOwner) { list ->
+            attractionAdapter?.apply {
+                submit(list)
+                setOnItemClick { data ->
+                    activityViewModel.selectAttractionData.value = data
+                    findNavController().navigate(R.id.attractionDetailFragment)
+                }
+            }
         }
     }
 }

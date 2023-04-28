@@ -18,6 +18,9 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val fetchAttractionsUseCase: FetchAttractionsUseCase
 ): BaseViewModel() {
+
+    val selectAttractionData = MutableLiveData<AttractionResponse.Data>()
+
     val attractionList = liveData {
         try {
             val dataList = fetchAttractionsUseCase()

@@ -7,6 +7,15 @@
     <fragment
         android:id="@+id/attractionFragment"
         android:name="com.leodemo.taipei_tour.fragment.attraction.AttractionFragment"
-        android:label="AttractionFragment" />
+        android:label="AttractionFragment" >
+        <action
+            android:id="@+id/action_attractionFragment_to_attractionDetailFragment"
+            app:destination="@id/attractionDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/attractionDetailFragment"
+        android:name="com.leodemo.taipei_tour.fragment.attraction.AttractionDetailFragment"
+        android:label="AttractionDeatilFragment" />
 
 </navigation>

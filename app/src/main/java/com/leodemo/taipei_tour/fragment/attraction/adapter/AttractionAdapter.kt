@@ -9,12 +9,15 @@ import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour.databinding.ItemAttractionBinding
 
-class AttractionAdapter: RecyclerView.Adapter<AttractionAdapter.AttractionViewHolder>() {
+class AttractionAdapter : RecyclerView.Adapter<AttractionAdapter.AttractionViewHolder>() {
 
     private var dataList = emptyList<AttractionResponse.Data>()
+    private var onItemClick: ((data: AttractionResponse.Data) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AttractionViewHolder {
-        return AttractionViewHolder.from(parent)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemAttractionBinding.inflate(inflater, parent, false)
+        return AttractionViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: AttractionViewHolder, position: Int) {
@@ -29,12 +32,17 @@ class AttractionAdapter: RecyclerView.Adapter<AttractionAdapter.AttractionViewHo
         notifyDataSetChanged()
     }
 
-    class AttractionViewHolder(private val binding: ItemAttractionBinding): RecyclerView.ViewHolder(binding.root) {
-        companion object{
-            fun from(parent: ViewGroup): AttractionViewHolder{
-                val inflater = LayoutInflater.from(parent.context)
-                val binding = ItemAttractionBinding.inflate(inflater, parent, false)
-                return AttractionViewHolder(binding)
+    fun setOnItemClick(onClick: (data: AttractionResponse.Data) -> Unit) {
+        onItemClick = onClick
+    }
+
+
+    inner class AttractionViewHolder(private val binding: ItemAttractionBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.clAttraction.setOnClickListener {
+                onItemClick?.invoke(dataList[adapterPosition])
             }
         }
 

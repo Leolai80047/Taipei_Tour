@@ -24,4 +24,11 @@ abstract class BaseFragment<V: ViewDataBinding, T: ViewModel>: HiltBaseFragment(
         return _binding?.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initToolbar()
+    }
+
+    open fun initToolbar() {}
+
 }
