@@ -8,7 +8,7 @@ import javax.inject.Inject
 class FetchAttractionsUseCase @Inject constructor(
     private val attractionRepository: AttractionInteractor
 ) {
-    suspend operator fun invoke(): List<AttractionResponse.Data> {
-        return attractionRepository.fetchAttractions()
+    suspend operator fun invoke(language: String): List<AttractionResponse.Data> {
+        return attractionRepository.fetchAttractions(language)
     }
 }

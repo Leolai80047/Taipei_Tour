@@ -57,7 +57,6 @@ class WebViewFragment: BaseFragment<FragmentWebviewBinding, WebViewViewModel>() 
                 return false
             }
         }
-
         binding.webView.loadUrl(url)
     }
 

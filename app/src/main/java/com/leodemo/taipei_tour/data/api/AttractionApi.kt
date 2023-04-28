@@ -8,6 +8,6 @@ interface AttractionApi {
     @GET("/open-api/{lang}/Attractions/All")
     suspend fun fetchAttractionList(
         @Header("accept") accept: String = "application/json",
-        @Path("lang") lang: String = "en"
+        @Path("lang") lang: String
     ): AttractionResponse
 }

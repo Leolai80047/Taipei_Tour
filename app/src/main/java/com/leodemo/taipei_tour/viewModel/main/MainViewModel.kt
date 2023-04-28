@@ -1,6 +1,7 @@
 package com.leodemo.taipei_tour.viewModel.main
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
@@ -21,12 +22,21 @@ class MainViewModel @Inject constructor(
 
     val selectAttractionData = MutableLiveData<AttractionResponse.Data>()
 
-    val attractionList = liveData {
-        try {
-            val dataList = fetchAttractionsUseCase()
-            emit(dataList)
-        } catch (e: Exception) {
-            throw e
+    private var _attractionList = MutableLiveData<List<AttractionResponse.Data>>()
+    val attractionList: LiveData<List<AttractionResponse.Data>> = _attractionList
+
+    init {
+        fetchAttraction("zh-tw")
+    }
+
+    fun fetchAttraction(language: String) {
+        viewModelScope.launch {
+            try {
+                val dataList = fetchAttractionsUseCase(language)
+                _attractionList.value = dataList
+            } catch (e: Exception) {
+                throw e
+            }
         }
     }
 }

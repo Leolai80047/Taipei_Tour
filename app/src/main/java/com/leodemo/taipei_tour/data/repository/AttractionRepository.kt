@@ -7,7 +7,7 @@ import javax.inject.Inject
 class AttractionRepository @Inject constructor(
     private val attractionApi: AttractionApi
 ) : AttractionInteractor {
-    override suspend fun fetchAttractions(): List<AttractionResponse.Data> {
-        return attractionApi.fetchAttractionList().data
+    override suspend fun fetchAttractions(language: String): List<AttractionResponse.Data> {
+        return attractionApi.fetchAttractionList(lang = language).data
     }
 }
