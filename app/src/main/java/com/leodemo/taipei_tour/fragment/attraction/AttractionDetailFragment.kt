@@ -15,6 +15,7 @@ import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.FragmentAttractionDetailBinding
 import com.leodemo.taipei_tour.ext.toHtmlText
 import com.leodemo.taipei_tour.fragment.base.BaseFragment
+import com.leodemo.taipei_tour.fragment.webView.WebViewFragment
 import com.leodemo.taipei_tour.viewModel.attraction.AttractionDetailViewModel
 import com.leodemo.taipei_tour.viewModel.main.MainViewModel
 
@@ -56,6 +57,15 @@ class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding, A
             binding.tvAddress.text = concatAddress
             binding.tvLastUpdate.text = concatDate
             binding.tvUrl.text = underlineUrl.toHtmlText()
+            binding.tvUrl.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString(WebViewFragment.URL, url)
+                navigateWebView(bundle)
+            }
         }
+    }
+
+    private fun navigateWebView(bundle: Bundle) {
+        findNavController().navigate(R.id.webViewFragment, bundle)
     }
 }

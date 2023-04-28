@@ -16,6 +16,15 @@
     <fragment
         android:id="@+id/attractionDetailFragment"
         android:name="com.leodemo.taipei_tour.fragment.attraction.AttractionDetailFragment"
-        android:label="AttractionDeatilFragment" />
+        android:label="AttractionDeatilFragment" >
+        <action
+            android:id="@+id/action_attractionDetailFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.leodemo.taipei_tour.fragment.webView.WebViewFragment"
+        android:label="WebViewFragment" />
 
 </navigation>
