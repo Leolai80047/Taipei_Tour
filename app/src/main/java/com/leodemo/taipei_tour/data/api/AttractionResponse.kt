@@ -9,6 +9,7 @@ data class AttractionResponse(
         val introduction: String,
         val address: String,
         val url: String,
+        val modified: String,
         private val images: List<ImageSrc>
     ) {
         data class ImageSrc(

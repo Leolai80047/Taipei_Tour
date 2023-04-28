@@ -1,12 +1,19 @@
 package com.leodemo.taipei_tour.fragment.attraction
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.FragmentAttractionDetailBinding
+import com.leodemo.taipei_tour.ext.toHtmlText
 import com.leodemo.taipei_tour.fragment.base.BaseFragment
 import com.leodemo.taipei_tour.viewModel.attraction.AttractionDetailViewModel
 import com.leodemo.taipei_tour.viewModel.main.MainViewModel
@@ -16,8 +23,9 @@ class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding, A
     private val activityViewModel: MainViewModel by activityViewModels()
     override val layoutId = R.layout.fragment_attraction_detail
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
     }
 
     override fun onDestroy() {
@@ -31,6 +39,23 @@ class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding, A
             setOnClickListener {
                 findNavController().popBackStack()
             }
+        }
+    }
+
+    private fun initView() {
+        activityViewModel.selectAttractionData.value?.apply{
+            val concatAddress =  "${getString(R.string.address)}\n${address}"
+            val concatDate = "${getString(R.string.last_update_time)}\n${modified}"
+            val underlineUrl = "<u>${url}</u>"
+            Glide.with(binding.root)
+                .load(getImage())
+                .error(R.drawable.ic_launcher_background)
+                .into(binding.ivAttraction)
+            binding.tvTitle.text = name
+            binding.tvDescription.text = introduction.toHtmlText()
+            binding.tvAddress.text = concatAddress
+            binding.tvLastUpdate.text = concatDate
+            binding.tvUrl.text = underlineUrl.toHtmlText()
         }
     }
 }

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -8,7 +10,97 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/layout_toolbar" />
+            layout="@layout/layout_toolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dimen_20">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_attraction"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_200"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_10"
+                    android:layout_marginTop="@dimen/dimen_20"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="@dimen/dimen_20"
+                    android:textStyle="bold"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_attraction"
+                    tools:ignore="SpUsage"
+                    tools:text="MAJI Square" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_20"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_title"
+                    app:layout_constraintRight_toRightOf="@id/tv_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title"
+                    tools:text="Hidden in the corner of the Yuanshan Plaza of Taipei Expo Park near the Taipei Fine Arts Museum, MAJI Square was officially opened in June 2013. The square was designed with cargo containers and wooden barns. Elements such as delicacies, original designs, music, art and so on, are combined cleverly here and a life market space with an exotic atmosphere is formed, just like an urban amusement park.\r\n\r\nMAJI Square contains six areas: farmers market, food fair, glasshouse market, exotic restaurants, specialty shops, and multipurpose performance space. In this life market square formed by cargo containers and wooden barns, you can get anything you want to eat, drink and play." />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_30"
+                    app:layout_constraintTop_toBottomOf="@id/tv_description"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_description"
+                    app:layout_constraintRight_toRightOf="@id/tv_description"
+                    tools:text="No. 1, Yumen St.,Zhongshan Dist.,Taipei City 104"/>
+
+                <TextView
+                    android:id="@+id/tv_last_update"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_30"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_address"
+                    app:layout_constraintRight_toRightOf="@id/tv_address"
+                    app:layout_constraintTop_toBottomOf="@id/tv_address"
+                    tools:text="2023-04-23 05:01:52 +08:00" />
+
+                <TextView
+                    android:id="@+id/tv_url"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_30"
+                    android:textColor="@color/hyper_link_text"
+                    android:textStyle=""
+                    app:layout_constraintTop_toBottomOf="@id/tv_last_update"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_last_update"
+                    app:layout_constraintRight_toRightOf="@id/tv_last_update"
+                    tools:text="https://www.travel.taipei/en/attraction/details/2227" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
