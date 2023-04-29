@@ -46,8 +46,9 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
             setImageResource(R.drawable.ic_translate)
             isVisible = true
             setOnClickListener {
-                translateOptionDialog = TranslateOptionDialog(requireActivity()) {
-                    fetchAttraction(it)
+                translateOptionDialog = TranslateOptionDialog(requireActivity()) { language ->
+                    if (language == activityViewModel.lastLanguage) return@TranslateOptionDialog
+                    fetchAttraction(language)
                     binding.rvAttraction.scrollToPosition(0)
                     binding.rvAttraction.isVisible = false
                 }

@@ -26,8 +26,8 @@ class MainViewModel @Inject constructor(
     private var _attractionList = MutableLiveData<List<AttractionResponse.Data>>()
     val attractionList: LiveData<List<AttractionResponse.Data>> = _attractionList
 
-    private var lastLanguage: String = getLastLanguageUseCase()
-        set(value) {
+    var lastLanguage: String = getLastLanguageUseCase()
+        private set(value) {
             setLastLanguageUseCase(value)
             field = value
         }
