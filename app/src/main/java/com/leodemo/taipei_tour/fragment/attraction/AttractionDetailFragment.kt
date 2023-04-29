@@ -50,7 +50,7 @@ class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding, A
             val underlineUrl = "<u>${url}</u>"
             Glide.with(binding.root)
                 .load(getImage())
-                .error(R.drawable.ic_launcher_background)
+                .error(R.drawable.img_not_found)
                 .into(binding.ivAttraction)
             binding.tvTitle.text = name
             binding.tvDescription.text = introduction.toHtmlText()

@@ -50,7 +50,8 @@ class AttractionAdapter : RecyclerView.Adapter<AttractionAdapter.AttractionViewH
             binding.apply {
                 Glide.with(root)
                     .load(data.getImage())
-                    .error(R.drawable.ic_launcher_background)
+                    .error(R.drawable.img_not_found)
+                    .placeholder(R.drawable.img_placeholder)
                     .into(ivAttraction)
                 tvTitle.text = data.name
                 tvOverview.text = data.introduction
