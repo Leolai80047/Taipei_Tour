@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 
 abstract class BaseDialogFragment<T : ViewDataBinding>(
-    val fragmentActivity: FragmentActivity
+    protected val fragmentActivity: FragmentActivity
 ) : DialogFragment() {
 
     private var _binding: T? = null

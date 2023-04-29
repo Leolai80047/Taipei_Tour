@@ -3,6 +3,7 @@ package com.leodemo.taipei_tour.dialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.LayoutTranslateOptionBinding
@@ -36,8 +37,13 @@ class TranslateOptionDialog(
     private fun initView() {
         setPercentWidth(0.8f)
         binding.rvLanguage.apply {
+            setHasFixedSize(true)
+            setItemViewCacheSize(10)
             adapter = translateOptionAdapter
             layoutManager = LinearLayoutManager(fragmentActivity)
+            addItemDecoration(
+                DividerItemDecoration(fragmentActivity, DividerItemDecoration.VERTICAL)
+            )
         }
     }
 }

@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.FragmentAttractionBinding
@@ -56,9 +57,14 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
     }
 
     private fun initView() {
-        binding.apply {
-            rvAttraction.adapter = attractionAdapter
-            rvAttraction.layoutManager = LinearLayoutManager(requireActivity())
+        binding.rvAttraction.apply {
+            setHasFixedSize(true)
+            setItemViewCacheSize(10)
+            adapter = attractionAdapter
+            layoutManager = LinearLayoutManager(requireActivity())
+            addItemDecoration(
+                DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL)
+            )
         }
     }
 
