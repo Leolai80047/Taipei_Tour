@@ -1,8 +1,7 @@
 package com.leodemo.taipei_tour.domain
 
 import com.leodemo.taipei_tour.data.api.AttractionResponse
-import com.leodemo.taipei_tour.data.repository.AttractionInteractor
-import com.leodemo.taipei_tour.data.repository.AttractionRepository
+import com.leodemo.taipei_tour.data.repository.attraction.AttractionInteractor
 import javax.inject.Inject
 
 class FetchAttractionsUseCase @Inject constructor(

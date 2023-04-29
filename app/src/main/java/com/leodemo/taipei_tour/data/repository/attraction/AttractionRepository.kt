@@ -1,7 +1,8 @@
-package com.leodemo.taipei_tour.data.repository
+package com.leodemo.taipei_tour.data.repository.attraction
 
 import com.leodemo.taipei_tour.data.api.AttractionApi
 import com.leodemo.taipei_tour.data.api.AttractionResponse
+import com.leodemo.taipei_tour.data.local.sharePreference.ShareLocalDataSource
 import javax.inject.Inject
 
 class AttractionRepository @Inject constructor(

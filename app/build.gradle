@@ -18,6 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "String", "DOMAIN", '"https://www.travel.taipei/"'
+        buildConfigField "String", "DEFAULT_LANGUAGE", '"zh-tw"'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -82,5 +83,8 @@ dependencies {
 
     // shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    // sharePreference
+    implementation 'androidx.preference:preference:1.2.0'
 
 }
