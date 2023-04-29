@@ -2,4 +2,6 @@
     <string name="app_name">台北旅遊</string>
     <string name="address">地址：</string>
     <string name="last_update_time">最後更新：</string>
+    <string name="system_error">系統錯誤</string>
+    <string name="confirm">確認</string>
 </resources>

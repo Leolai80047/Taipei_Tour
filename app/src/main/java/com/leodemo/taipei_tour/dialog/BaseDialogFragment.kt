@@ -21,6 +21,8 @@ abstract class BaseDialogFragment<T : ViewDataBinding>(
 
     protected var layoutId: Int = 0
 
+    protected var onDialogViewCreateCallback: (() -> Unit)? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (layoutId > 0) {
             _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
@@ -30,11 +32,16 @@ abstract class BaseDialogFragment<T : ViewDataBinding>(
         return _binding?.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        onDialogViewCreateCallback?.invoke()
+    }
+
     fun show() {
         show(fragmentActivity.supportFragmentManager, "")
     }
 
-    fun setPercentWidth(widthPercent: Float) {
+    open fun setPercentWidth(widthPercent: Float) {
         val dm = Resources.getSystem().displayMetrics
         val rect = Rect(0,0, dm.widthPixels, dm.heightPixels)
         val width = rect.width() * widthPercent

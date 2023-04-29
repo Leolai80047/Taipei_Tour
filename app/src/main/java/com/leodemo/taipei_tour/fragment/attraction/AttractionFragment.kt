@@ -9,9 +9,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.FragmentAttractionBinding
+import com.leodemo.taipei_tour.dialog.AlertDialog
 import com.leodemo.taipei_tour.dialog.TranslateOptionDialog
 import com.leodemo.taipei_tour.fragment.attraction.adapter.AttractionAdapter
 import com.leodemo.taipei_tour.fragment.base.BaseFragment
+import com.leodemo.taipei_tour.utils.EventObserver
 import com.leodemo.taipei_tour.viewModel.attraction.AttractionViewModel
 import com.leodemo.taipei_tour.viewModel.main.MainViewModel
 
@@ -22,6 +24,7 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
 
     private var attractionAdapter: AttractionAdapter? = AttractionAdapter()
     private var translateOptionDialog: TranslateOptionDialog? = null
+    private var alertDialog: AlertDialog? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,6 +36,7 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
         super.onDestroy()
         attractionAdapter = null
         translateOptionDialog = null
+        alertDialog = null
     }
 
     override fun initToolbar() {
@@ -70,6 +74,19 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
             }
             binding.rvAttraction.isVisible = true
         }
+
+        activityViewModel.alertDialog.observe(viewLifecycleOwner, EventObserver { message ->
+            alertDialog = AlertDialog(requireActivity()) {
+                alertDialog
+                    ?.setDescription(message)
+                    ?.setConfirmClick {
+                        binding.rvAttraction.isVisible = true
+                        stopShimmer()
+                        alertDialog?.dismiss()
+                    }
+            }
+            alertDialog?.show()
+        })
     }
 
     private fun startShimmer() {
