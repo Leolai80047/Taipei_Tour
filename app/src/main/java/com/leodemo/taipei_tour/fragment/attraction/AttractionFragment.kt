@@ -42,8 +42,9 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
             isVisible = true
             setOnClickListener {
                 translateOptionDialog = TranslateOptionDialog(requireActivity()) {
-                    activityViewModel.fetchAttraction(it)
+                    fetchAttraction(it)
                     binding.rvAttraction.scrollToPosition(0)
+                    binding.rvAttraction.isVisible = false
                 }
                 translateOptionDialog?.show()
             }
@@ -60,12 +61,29 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
     private fun initObserver() {
         activityViewModel.attractionList.observe(viewLifecycleOwner) { list ->
             attractionAdapter?.apply {
+                stopShimmer()
                 submit(list)
                 setOnItemClick { data ->
                     activityViewModel.selectAttractionData.value = data
                     findNavController().navigate(R.id.attractionDetailFragment)
                 }
             }
+            binding.rvAttraction.isVisible = true
         }
+    }
+
+    private fun startShimmer() {
+        binding.shimmerAttraction.startShimmer()
+        binding.shimmerAttraction.isVisible = true
+    }
+
+    private fun stopShimmer() {
+        binding.shimmerAttraction.stopShimmer()
+        binding.shimmerAttraction.isVisible = false
+    }
+
+    private fun fetchAttraction(language: String) {
+        startShimmer()
+        activityViewModel.fetchAttraction(language)
     }
 }
