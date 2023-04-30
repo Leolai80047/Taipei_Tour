@@ -73,7 +73,7 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
                 submit(list)
                 setOnItemClick { data ->
                     activityViewModel.selectAttractionData.value = data
-                    findNavController().navigate(R.id.attractionDetailFragment)
+                    findNavController().navigate(R.id.action_attractionFragment_to_attractionDetailFragment)
                 }
             }
             binding.rvAttraction.isVisible = true

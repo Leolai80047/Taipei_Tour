@@ -66,6 +66,6 @@ class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding, A
     }
 
     private fun navigateWebView(bundle: Bundle) {
-        findNavController().navigate(R.id.webViewFragment, bundle)
+        findNavController().navigate(R.id.action_attractionDetailFragment_to_webViewFragment, bundle)
     }
 }

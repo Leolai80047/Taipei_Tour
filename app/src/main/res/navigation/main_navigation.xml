@@ -7,19 +7,23 @@
     <fragment
         android:id="@+id/attractionFragment"
         android:name="com.leodemo.taipei_tour.fragment.attraction.AttractionFragment"
-        android:label="AttractionFragment" >
+        android:label="AttractionFragment">
         <action
             android:id="@+id/action_attractionFragment_to_attractionDetailFragment"
-            app:destination="@id/attractionDetailFragment" />
+            app:destination="@id/attractionDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_out_left" />
     </fragment>
 
     <fragment
         android:id="@+id/attractionDetailFragment"
         android:name="com.leodemo.taipei_tour.fragment.attraction.AttractionDetailFragment"
-        android:label="AttractionDeatilFragment" >
+        android:label="AttractionDeatilFragment">
         <action
             android:id="@+id/action_attractionDetailFragment_to_webViewFragment"
-            app:destination="@id/webViewFragment" />
+            app:destination="@id/webViewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_out_left" />
     </fragment>
 
     <fragment
