@@ -12,4 +12,6 @@
     <color name="shimmer_background">#8A8686</color>
     <color name="primary_background">#A4B8AC</color>
     <color name="secondary_background">#DCE1DA</color>
+    <color name="button_primary_background">#8E929B</color>
+    <color name="button_primary_text">#FFFFFF</color>
 </resources>

@@ -5,4 +5,5 @@
     <string name="last_update_time">pembaruan terbaru:</string>
     <string name="system_error">sistem bermasalah</string>
     <string name="confirm">mengonfirmasi</string>
+    <string name="please_select_language">Silakan pilih bahasa</string>
 </resources>

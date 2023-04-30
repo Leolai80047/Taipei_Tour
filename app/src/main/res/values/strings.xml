@@ -4,4 +4,5 @@
     <string name="last_update_time">最後更新：</string>
     <string name="system_error">系統錯誤</string>
     <string name="confirm">確認</string>
+    <string name="please_select_language">請選擇語言</string>
 </resources>

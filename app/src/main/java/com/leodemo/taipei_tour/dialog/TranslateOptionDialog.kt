@@ -11,7 +11,7 @@ import com.leodemo.taipei_tour.databinding.LayoutTranslateOptionBinding
 class TranslateOptionDialog(
     currentActivity: FragmentActivity,
     onItemClick: ((String) -> Unit)
-): BaseDialogFragment<LayoutTranslateOptionBinding>(currentActivity) {
+) : BaseDialogFragment<LayoutTranslateOptionBinding>(currentActivity) {
 
     private var translateOptionAdapter: TranslateOptionAdapter? = null
 
@@ -45,5 +45,6 @@ class TranslateOptionDialog(
                 DividerItemDecoration(fragmentActivity, DividerItemDecoration.VERTICAL)
             )
         }
+        dialog?.window?.setBackgroundDrawableResource(R.drawable.background_round)
     }
 }

@@ -5,4 +5,5 @@
     <string name="last_update_time">última actualización:</string>
     <string name="system_error">error del sistema</string>
     <string name="confirm">confirmar</string>
+    <string name="please_select_language">Por favor selecciona idioma</string>
 </resources>

@@ -4,7 +4,6 @@ import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.LayoutAlertDialogBinding
@@ -30,7 +29,7 @@ class AlertDialog(
     }
 
     fun setConfirmClick(onClick: () -> Unit): AlertDialog {
-        binding.tvConfirm.setOnClickListener{
+        binding.tvConfirm.setOnClickListener {
             onClick()
         }
         return this
@@ -38,12 +37,13 @@ class AlertDialog(
 
     private fun initView() {
         dialog?.setCanceledOnTouchOutside(false)
+        dialog?.window?.setBackgroundDrawableResource(R.drawable.background_round)
         setPercentWidth(0.8f)
     }
 
     override fun setPercentWidth(widthPercent: Float) {
         val dm = Resources.getSystem().displayMetrics
-        val rect = Rect(0,0, dm.widthPixels, dm.heightPixels)
+        val rect = Rect(0, 0, dm.widthPixels, dm.heightPixels)
         val width = rect.width() * widthPercent
         dialog?.window?.setLayout(width.toInt(), fragmentActivity.resources.getDimensionPixelSize(R.dimen.dimen_250))
     }
