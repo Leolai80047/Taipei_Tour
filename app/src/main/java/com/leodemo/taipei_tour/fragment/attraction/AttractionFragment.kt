@@ -6,7 +6,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.FragmentAttractionBinding
@@ -50,7 +49,6 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
                 translateOptionDialog = TranslateOptionDialog(requireActivity()) { language ->
                     if (language == activityViewModel.lastLanguage) return@TranslateOptionDialog
                     fetchAttraction(language)
-                    binding.rvAttraction.scrollToPosition(0)
                     binding.rvAttraction.isVisible = false
                     activityViewModel.restartActivity.value = Event(true)
                 }
@@ -65,9 +63,6 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
             setItemViewCacheSize(10)
             adapter = attractionAdapter
             layoutManager = LinearLayoutManager(requireActivity())
-            addItemDecoration(
-                DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL)
-            )
         }
     }
 

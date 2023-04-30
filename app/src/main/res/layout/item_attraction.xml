@@ -8,7 +8,9 @@
         android:id="@+id/cl_attraction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_secondary_shadow"
         android:padding="@dimen/dimen_10"
+        android:layout_margin="@dimen/dimen_5"
         tools:ignore="SpUsage">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -19,7 +21,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_launcher_background" />
+            tools:src="@drawable/img_placeholder" />
 
         <TextView
             android:id="@+id/tv_title"
