@@ -14,6 +14,7 @@ import com.leodemo.taipei_tour.dialog.AlertDialog
 import com.leodemo.taipei_tour.dialog.TranslateOptionDialog
 import com.leodemo.taipei_tour.fragment.attraction.adapter.AttractionAdapter
 import com.leodemo.taipei_tour.fragment.base.BaseFragment
+import com.leodemo.taipei_tour.utils.Event
 import com.leodemo.taipei_tour.utils.EventObserver
 import com.leodemo.taipei_tour.viewModel.attraction.AttractionViewModel
 import com.leodemo.taipei_tour.viewModel.main.MainViewModel
@@ -51,6 +52,7 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
                     fetchAttraction(language)
                     binding.rvAttraction.scrollToPosition(0)
                     binding.rvAttraction.isVisible = false
+                    activityViewModel.restartActivity.value = Event(true)
                 }
                 translateOptionDialog?.show()
             }

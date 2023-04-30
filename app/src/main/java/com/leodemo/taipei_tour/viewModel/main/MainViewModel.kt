@@ -3,7 +3,6 @@ package com.leodemo.taipei_tour.viewModel.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.leodemo.taipei_tour.BuildConfig
 import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour.domain.FetchAttractionsUseCase
 import com.leodemo.taipei_tour.domain.GetLastLanguageUseCase
@@ -26,6 +25,8 @@ class MainViewModel @Inject constructor(
     private var _attractionList = MutableLiveData<List<AttractionResponse.Data>>()
     val attractionList: LiveData<List<AttractionResponse.Data>> = _attractionList
 
+    val restartActivity = MutableLiveData<Event<Boolean>>()
+
     var lastLanguage: String = getLastLanguageUseCase()
         private set(value) {
             setLastLanguageUseCase(value)
@@ -37,11 +38,11 @@ class MainViewModel @Inject constructor(
     }
 
     fun fetchAttraction(language: String) {
+        lastLanguage = language
         viewModelScope.launch {
             try {
                 val dataList = fetchAttractionsUseCase(language)
                 _attractionList.value = dataList
-                lastLanguage = language
             } catch (e: Throwable) {
                 _alertDialog.postValue(Event(e.message ?: e.stackTrace.toString()))
             }

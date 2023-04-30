@@ -4,22 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.leodemo.taipei_tour.databinding.ItemTranslateLanguageBinding
+import com.leodemo.taipei_tour.utils.SupportLanguage
 
 class TranslateOptionAdapter(
     private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<TranslateOptionAdapter.TranslateOptionViewHolder>() {
 
-    private val languageList = listOf(
-        "zh-tw",
-        "zh-cn",
-        "en",
-        "ja",
-        "ko",
-        "es",
-        "id",
-        "th",
-        "vi"
-    )
+    private val languageList = SupportLanguage.getSupportLanguageList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TranslateOptionViewHolder {
         val inflater = LayoutInflater.from(parent.context)

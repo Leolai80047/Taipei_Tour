@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">타이베이 여행</string>
+    <string name="address">주소:</string>
+    <string name="last_update_time">최근 업데이트:</string>
+    <string name="system_error">시스템 오류</string>
+    <string name="confirm">확인하다</string>
+</resources>
