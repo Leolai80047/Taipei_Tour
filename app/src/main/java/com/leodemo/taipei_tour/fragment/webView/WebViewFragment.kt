@@ -2,7 +2,10 @@ package com.leodemo.taipei_tour.fragment.webView
 
 import android.os.Bundle
 import android.view.View
-import android.webkit.*
+import android.webkit.WebResourceRequest
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,11 +14,11 @@ import com.leodemo.taipei_tour.databinding.FragmentWebviewBinding
 import com.leodemo.taipei_tour.fragment.base.BaseFragment
 import com.leodemo.taipei_tour.viewModel.webView.WebViewViewModel
 
-class WebViewFragment: BaseFragment<FragmentWebviewBinding, WebViewViewModel>() {
+class WebViewFragment : BaseFragment<FragmentWebviewBinding, WebViewViewModel>() {
     override val viewModel: WebViewViewModel by viewModels()
     override val layoutId = R.layout.fragment_webview
 
-    companion object{
+    companion object {
         const val URL = "url"
     }
 
@@ -39,7 +42,7 @@ class WebViewFragment: BaseFragment<FragmentWebviewBinding, WebViewViewModel>() 
     }
 
     private fun initWebView() {
-        val url = arguments?.getString(URL)?: "about:blank"
+        val url = arguments?.getString(URL) ?: "about:blank"
 
         binding.webView.settings.apply {
             useWideViewPort = true
@@ -55,6 +58,12 @@ class WebViewFragment: BaseFragment<FragmentWebviewBinding, WebViewViewModel>() 
                     return true
                 }
                 return false
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                binding.progressBar.isVisible = false
+                binding.webView.isVisible = true
             }
         }
         binding.webView.loadUrl(url)
