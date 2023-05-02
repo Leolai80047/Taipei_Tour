@@ -5,7 +5,11 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.FragmentAttractionBinding
@@ -17,6 +21,7 @@ import com.leodemo.taipei_tour.utils.Event
 import com.leodemo.taipei_tour.utils.EventObserver
 import com.leodemo.taipei_tour.viewModel.attraction.AttractionViewModel
 import com.leodemo.taipei_tour.viewModel.main.MainViewModel
+import kotlinx.coroutines.launch
 
 class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionViewModel>() {
     override val viewModel: AttractionViewModel by viewModels()
@@ -48,8 +53,7 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
             setOnClickListener {
                 translateOptionDialog = TranslateOptionDialog(requireActivity()) { language ->
                     if (language == activityViewModel.lastLanguage) return@TranslateOptionDialog
-                    fetchAttraction(language)
-                    binding.rvAttraction.isVisible = false
+                    activityViewModel.lastLanguage = language
                     activityViewModel.restartActivity.value = Event(true)
                 }
                 translateOptionDialog?.show()
@@ -67,18 +71,6 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
     }
 
     private fun initObserver() {
-        activityViewModel.attractionList.observe(viewLifecycleOwner) { list ->
-            attractionAdapter?.apply {
-                stopShimmer()
-                submit(list)
-                setOnItemClick { data ->
-                    activityViewModel.selectAttractionData.value = data
-                    findNavController().navigate(R.id.action_attractionFragment_to_attractionDetailFragment)
-                }
-            }
-            binding.rvAttraction.isVisible = true
-        }
-
         activityViewModel.alertDialog.observe(viewLifecycleOwner, EventObserver { message ->
             alertDialog = AlertDialog(requireActivity()) {
                 alertDialog
@@ -91,20 +83,31 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
             }
             alertDialog?.show()
         })
-    }
 
-    private fun startShimmer() {
-        binding.shimmerAttraction.startShimmer()
-        binding.shimmerAttraction.isVisible = true
+        lifecycleScope.launch(activityViewModel.apiHandler) {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.attractionPagingData
+                    .collect {
+                        attractionAdapter?.submitData(viewLifecycleOwner.lifecycle, it)
+                    }
+            }
+        }
+
+        attractionAdapter?.apply {
+            addLoadStateListener {
+                if (itemCount != 0 && it.refresh is LoadState.NotLoading) {
+                    stopShimmer()
+                }
+            }
+            setOnItemClick { data ->
+                activityViewModel.selectAttractionData.value = data
+                findNavController().navigate(R.id.action_attractionFragment_to_attractionDetailFragment)
+            }
+        }
     }
 
     private fun stopShimmer() {
         binding.shimmerAttraction.stopShimmer()
         binding.shimmerAttraction.isVisible = false
-    }
-
-    private fun fetchAttraction(language: String) {
-        startShimmer()
-        activityViewModel.fetchAttraction(language)
     }
 }

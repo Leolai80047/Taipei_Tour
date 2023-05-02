@@ -1,17 +1,34 @@
 package com.leodemo.taipei_tour.fragment.attraction.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.data.api.AttractionResponse
 import com.leodemo.taipei_tour.databinding.ItemAttractionBinding
 
-class AttractionAdapter : RecyclerView.Adapter<AttractionAdapter.AttractionViewHolder>() {
+class AttractionAdapter : PagingDataAdapter<AttractionResponse.Data, AttractionAdapter.AttractionViewHolder>(
+    INDIFFERENCE
+) {
 
-    private var dataList = emptyList<AttractionResponse.Data>()
+    companion object {
+        val INDIFFERENCE = object : DiffUtil.ItemCallback<AttractionResponse.Data>() {
+            override fun areItemsTheSame(oldItem: AttractionResponse.Data, newItem: AttractionResponse.Data): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(
+                oldItem: AttractionResponse.Data,
+                newItem: AttractionResponse.Data
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
+    }
+
     private var onItemClick: ((data: AttractionResponse.Data) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AttractionViewHolder {
@@ -21,15 +38,7 @@ class AttractionAdapter : RecyclerView.Adapter<AttractionAdapter.AttractionViewH
     }
 
     override fun onBindViewHolder(holder: AttractionViewHolder, position: Int) {
-        holder.bind(dataList[position])
-    }
-
-    override fun getItemCount() = dataList.size
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun submit(list: List<AttractionResponse.Data>) {
-        dataList = list
-        notifyDataSetChanged()
+        holder.bind(getItem(position) ?: return)
     }
 
     fun setOnItemClick(onClick: (data: AttractionResponse.Data) -> Unit) {
@@ -42,7 +51,7 @@ class AttractionAdapter : RecyclerView.Adapter<AttractionAdapter.AttractionViewH
 
         init {
             binding.clAttraction.setOnClickListener {
-                onItemClick?.invoke(dataList[adapterPosition])
+                onItemClick?.invoke(getItem(layoutPosition) ?: return@setOnClickListener)
             }
         }
 
