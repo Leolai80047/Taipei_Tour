@@ -3,5 +3,6 @@
     <style name="Theme.TaipeiTour" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary_color</item>
         <item name="android:statusBarColor">@color/primary_color</item>
+        <item name="android:windowBackground">@drawable/img_splash</item>
     </style>
 </resources>
