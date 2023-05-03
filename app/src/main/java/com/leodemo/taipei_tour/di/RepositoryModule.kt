@@ -19,9 +19,9 @@ object RepositoryModule {
     @Provides
     fun provideAttractionRepository(
         attractionApi: AttractionApi,
-        attractionPagingSource: AttractionPagingSource
+        sharePreferenceDataSource: ShareLocalDataSource
     ): AttractionInteractor {
-        return AttractionRepository(attractionApi, attractionPagingSource)
+        return AttractionRepository(attractionApi,sharePreferenceDataSource)
     }
 
     @Provides

@@ -16,6 +16,7 @@ import com.leodemo.taipei_tour.databinding.FragmentAttractionBinding
 import com.leodemo.taipei_tour.dialog.AlertDialog
 import com.leodemo.taipei_tour.dialog.TranslateOptionDialog
 import com.leodemo.taipei_tour.fragment.attraction.adapter.AttractionAdapter
+import com.leodemo.taipei_tour.fragment.attraction.adapter.AttractionLoadMoreAdapter
 import com.leodemo.taipei_tour.fragment.base.BaseFragment
 import com.leodemo.taipei_tour.utils.Event
 import com.leodemo.taipei_tour.utils.EventObserver
@@ -62,10 +63,23 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
     }
 
     private fun initView() {
+
+        attractionAdapter?.apply {
+            addLoadStateListener {
+                if (itemCount != 0 && it.refresh is LoadState.NotLoading) {
+                    stopShimmer()
+                }
+            }
+            setOnItemClick { data ->
+                activityViewModel.selectAttractionData.value = data
+                findNavController().navigate(R.id.action_attractionFragment_to_attractionDetailFragment)
+            }
+        }
+
         binding.rvAttraction.apply {
             setHasFixedSize(true)
             setItemViewCacheSize(10)
-            adapter = attractionAdapter
+            adapter = attractionAdapter?.withLoadStateFooter(AttractionLoadMoreAdapter())
             layoutManager = LinearLayoutManager(requireActivity())
         }
     }
@@ -90,18 +104,6 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
                     .collect {
                         attractionAdapter?.submitData(viewLifecycleOwner.lifecycle, it)
                     }
-            }
-        }
-
-        attractionAdapter?.apply {
-            addLoadStateListener {
-                if (itemCount != 0 && it.refresh is LoadState.NotLoading) {
-                    stopShimmer()
-                }
-            }
-            setOnItemClick { data ->
-                activityViewModel.selectAttractionData.value = data
-                findNavController().navigate(R.id.action_attractionFragment_to_attractionDetailFragment)
             }
         }
     }

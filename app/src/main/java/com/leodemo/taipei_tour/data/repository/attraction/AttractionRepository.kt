@@ -5,13 +5,14 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.leodemo.taipei_tour.data.api.AttractionApi
 import com.leodemo.taipei_tour.data.api.AttractionResponse
+import com.leodemo.taipei_tour.data.local.sharePreference.ShareLocalDataSource
 import com.leodemo.taipei_tour.data.pagingSource.AttractionPagingSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class AttractionRepository @Inject constructor(
     private val attractionApi: AttractionApi,
-    private val attractionPagingSource: AttractionPagingSource
+    private val sharePreferenceDataSource: ShareLocalDataSource
 ) : AttractionInteractor {
     override suspend fun fetchAttractions(language: String): List<AttractionResponse.Data> {
         return attractionApi.fetchAttractionList(lang = language).data
@@ -25,7 +26,7 @@ class AttractionRepository @Inject constructor(
                 initialLoadSize = 5
             ),
             pagingSourceFactory = {
-                attractionPagingSource
+                AttractionPagingSource(attractionApi, sharePreferenceDataSource)
             },
             initialKey = 1,
         ).flow
