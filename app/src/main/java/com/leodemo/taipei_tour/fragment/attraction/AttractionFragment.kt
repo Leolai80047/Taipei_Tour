@@ -2,6 +2,7 @@ package com.leodemo.taipei_tour.fragment.attraction
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -9,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leodemo.taipei_tour.R
@@ -22,6 +24,8 @@ import com.leodemo.taipei_tour.utils.Event
 import com.leodemo.taipei_tour.utils.EventObserver
 import com.leodemo.taipei_tour.viewModel.attraction.AttractionViewModel
 import com.leodemo.taipei_tour.viewModel.main.MainViewModel
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onErrorResumeNext
 import kotlinx.coroutines.launch
 
 class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionViewModel>() {
@@ -65,8 +69,9 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
     private fun initView() {
 
         attractionAdapter?.apply {
-            addLoadStateListener {
-                if (itemCount != 0 && it.refresh is LoadState.NotLoading) {
+            addLoadStateListener { loadState ->
+                handlePagingError(loadState)
+                if (itemCount != 0 && loadState.refresh is LoadState.NotLoading) {
                     stopShimmer()
                 }
             }
@@ -82,6 +87,10 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
             adapter = attractionAdapter?.withLoadStateFooter(AttractionLoadMoreAdapter())
             layoutManager = LinearLayoutManager(requireActivity())
         }
+
+        binding.srlAttraction.setOnRefreshListener {
+            attractionAdapter?.refresh()
+        }
     }
 
     private fun initObserver() {
@@ -90,7 +99,6 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
                 alertDialog
                     ?.setDescription(message)
                     ?.setConfirmClick {
-                        binding.rvAttraction.isVisible = true
                         stopShimmer()
                         alertDialog?.dismiss()
                     }
@@ -106,10 +114,33 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
                     }
             }
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                attractionAdapter?.loadStateFlow?.collect{
+                    binding.srlAttraction.isRefreshing = it.refresh is LoadState.Loading && binding.shimmerAttraction.isGone
+                }
+            }
+        }
+
     }
 
     private fun stopShimmer() {
         binding.shimmerAttraction.stopShimmer()
         binding.shimmerAttraction.isVisible = false
+    }
+
+    private fun handlePagingError(loadState: CombinedLoadStates) {
+        val errorState = when {
+            loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+            loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+            loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+            else -> null
+        }
+
+        errorState?.let {
+            val error = errorState.error
+            activityViewModel.showAlert(error.message?: error.stackTraceToString())
+        }
     }
 }

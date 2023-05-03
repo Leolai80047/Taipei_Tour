@@ -14,11 +14,11 @@ class AttractionPagingSource @Inject constructor(
     var page = 1
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AttractionResponse.Data> {
         val position = params.key ?: page
-        val data = attractionApi.fetchAttractionList(
-            lang = sharePreferenceDataSource.lastLanguage,
-            page = position
-        ).data
         return try {
+            val data = attractionApi.fetchAttractionList(
+                lang = sharePreferenceDataSource.lastLanguage,
+                page = position
+            ).data
             LoadResult.Page(
                 data = data,
                 prevKey = if (page == 1) null else page - 1,

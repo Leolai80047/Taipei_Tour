@@ -8,4 +8,8 @@ import com.leodemo.taipei_tour.utils.Event
 abstract class BaseViewModel : ViewModel() {
     protected var _alertDialog: MutableLiveData<Event<String>> = MutableLiveData<Event<String>>()
     val alertDialog: LiveData<Event<String>> = _alertDialog
+
+    fun showAlert(message: String) {
+        _alertDialog.value = Event(message)
+    }
 }
