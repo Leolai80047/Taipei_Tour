@@ -1,10 +1,10 @@
-package com.leodemo.taipei_tour.activity.main
+package com.leodemo.taipei_tour.ui.activity.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.leodemo.taipei_tour.R
-import com.leodemo.taipei_tour.activity.base.BaseActivity
 import com.leodemo.taipei_tour.databinding.ActivityMainBinding
+import com.leodemo.taipei_tour.ui.activity.base.BaseActivity
 import com.leodemo.taipei_tour.utils.EventObserver
 import com.leodemo.taipei_tour.viewModel.main.MainViewModel
 

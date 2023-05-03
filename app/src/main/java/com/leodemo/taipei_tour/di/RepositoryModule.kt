@@ -2,7 +2,6 @@ package com.leodemo.taipei_tour.di
 
 import com.leodemo.taipei_tour.data.api.AttractionApi
 import com.leodemo.taipei_tour.data.local.sharePreference.ShareLocalDataSource
-import com.leodemo.taipei_tour.data.pagingSource.AttractionPagingSource
 import com.leodemo.taipei_tour.data.repository.attraction.AttractionInteractor
 import com.leodemo.taipei_tour.data.repository.attraction.AttractionRepository
 import com.leodemo.taipei_tour.data.repository.language.AttractionLanguageInteractor
@@ -21,7 +20,7 @@ object RepositoryModule {
         attractionApi: AttractionApi,
         sharePreferenceDataSource: ShareLocalDataSource
     ): AttractionInteractor {
-        return AttractionRepository(attractionApi,sharePreferenceDataSource)
+        return AttractionRepository(attractionApi, sharePreferenceDataSource)
     }
 
     @Provides

@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour.dialog
+package com.leodemo.taipei_tour.ui.dialog
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour.fragment.attraction
+package com.leodemo.taipei_tour.ui.fragment.attraction
 
 import android.os.Bundle
 import android.view.View
@@ -15,17 +15,15 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.FragmentAttractionBinding
-import com.leodemo.taipei_tour.dialog.AlertDialog
-import com.leodemo.taipei_tour.dialog.TranslateOptionDialog
-import com.leodemo.taipei_tour.fragment.attraction.adapter.AttractionAdapter
-import com.leodemo.taipei_tour.fragment.attraction.adapter.AttractionLoadMoreAdapter
-import com.leodemo.taipei_tour.fragment.base.BaseFragment
+import com.leodemo.taipei_tour.ui.dialog.AlertDialog
+import com.leodemo.taipei_tour.ui.dialog.TranslateOptionDialog
+import com.leodemo.taipei_tour.ui.fragment.attraction.adapter.AttractionAdapter
+import com.leodemo.taipei_tour.ui.fragment.attraction.adapter.AttractionLoadMoreAdapter
+import com.leodemo.taipei_tour.ui.fragment.base.BaseFragment
 import com.leodemo.taipei_tour.utils.Event
 import com.leodemo.taipei_tour.utils.EventObserver
 import com.leodemo.taipei_tour.viewModel.attraction.AttractionViewModel
 import com.leodemo.taipei_tour.viewModel.main.MainViewModel
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onErrorResumeNext
 import kotlinx.coroutines.launch
 
 class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionViewModel>() {
@@ -117,8 +115,9 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                attractionAdapter?.loadStateFlow?.collect{
-                    binding.srlAttraction.isRefreshing = it.refresh is LoadState.Loading && binding.shimmerAttraction.isGone
+                attractionAdapter?.loadStateFlow?.collect {
+                    binding.srlAttraction.isRefreshing =
+                        it.refresh is LoadState.Loading && binding.shimmerAttraction.isGone
                 }
             }
         }
@@ -140,7 +139,7 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
 
         errorState?.let {
             val error = errorState.error
-            activityViewModel.showAlert(error.message?: error.stackTraceToString())
+            activityViewModel.showAlert(error.message ?: error.stackTraceToString())
         }
     }
 }

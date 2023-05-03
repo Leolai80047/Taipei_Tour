@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour.fragment.base
+package com.leodemo.taipei_tour.ui.fragment.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +9,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import com.leodemo.taipei_tour.di.HiltBaseFragment
 
-abstract class BaseFragment<V: ViewDataBinding, T: ViewModel>: HiltBaseFragment() {
+abstract class BaseFragment<V : ViewDataBinding, T : ViewModel> : HiltBaseFragment() {
     private var _binding: V? = null
     val binding: V
-        get() = _binding?: throw Exception("View Not Bind!")
+        get() = _binding ?: throw Exception("View Not Bind!")
 
     abstract val viewModel: T
     abstract val layoutId: Int

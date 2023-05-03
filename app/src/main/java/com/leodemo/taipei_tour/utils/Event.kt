@@ -18,7 +18,7 @@ class Event<out T>(private val content: T) {
     fun peekContent(): T = content
 }
 
-class EventObserver<T>(private val onEventHandle: (T) -> Unit): Observer<Event<T>> {
+class EventObserver<T>(private val onEventHandle: (T) -> Unit) : Observer<Event<T>> {
     override fun onChanged(event: Event<T>?) {
         event?.getContentIfNotHandled()?.let {
             onEventHandle.invoke(it)

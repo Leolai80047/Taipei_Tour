@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour.fragment.webView
+package com.leodemo.taipei_tour.ui.fragment.webView
 
 import android.os.Bundle
 import android.view.View
@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.FragmentWebviewBinding
-import com.leodemo.taipei_tour.fragment.base.BaseFragment
+import com.leodemo.taipei_tour.ui.fragment.base.BaseFragment
 import com.leodemo.taipei_tour.viewModel.webView.WebViewViewModel
 
 class WebViewFragment : BaseFragment<FragmentWebviewBinding, WebViewViewModel>() {

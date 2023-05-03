@@ -1,10 +1,6 @@
-package com.leodemo.taipei_tour.fragment.attraction
+package com.leodemo.taipei_tour.ui.fragment.attraction
 
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.text.Spanned
-import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -14,8 +10,8 @@ import com.bumptech.glide.Glide
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.FragmentAttractionDetailBinding
 import com.leodemo.taipei_tour.ext.toHtmlText
-import com.leodemo.taipei_tour.fragment.base.BaseFragment
-import com.leodemo.taipei_tour.fragment.webView.WebViewFragment
+import com.leodemo.taipei_tour.ui.fragment.base.BaseFragment
+import com.leodemo.taipei_tour.ui.fragment.webView.WebViewFragment
 import com.leodemo.taipei_tour.viewModel.attraction.AttractionDetailViewModel
 import com.leodemo.taipei_tour.viewModel.main.MainViewModel
 
@@ -44,8 +40,8 @@ class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding, A
     }
 
     private fun initView() {
-        activityViewModel.selectAttractionData.value?.apply{
-            val concatAddress =  "${getString(R.string.address)}\n${address}"
+        activityViewModel.selectAttractionData.value?.apply {
+            val concatAddress = "${getString(R.string.address)}\n${address}"
             val concatDate = "${getString(R.string.last_update_time)}\n${modified}"
             val underlineUrl = "<u>${url}</u>"
             Glide.with(binding.root)

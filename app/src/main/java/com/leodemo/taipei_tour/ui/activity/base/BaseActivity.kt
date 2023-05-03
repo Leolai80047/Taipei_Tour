@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour.activity.base
+package com.leodemo.taipei_tour.ui.activity.base
 
 import android.content.Context
 import android.os.Bundle

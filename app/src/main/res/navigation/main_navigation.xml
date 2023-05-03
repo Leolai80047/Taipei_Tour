@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/attractionFragment"
-        android:name="com.leodemo.taipei_tour.fragment.attraction.AttractionFragment"
+        android:name="com.leodemo.taipei_tour.ui.fragment.attraction.AttractionFragment"
         android:label="AttractionFragment">
         <action
             android:id="@+id/action_attractionFragment_to_attractionDetailFragment"
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/attractionDetailFragment"
-        android:name="com.leodemo.taipei_tour.fragment.attraction.AttractionDetailFragment"
+        android:name="com.leodemo.taipei_tour.ui.fragment.attraction.AttractionDetailFragment"
         android:label="AttractionDeatilFragment">
         <action
             android:id="@+id/action_attractionDetailFragment_to_webViewFragment"
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/webViewFragment"
-        android:name="com.leodemo.taipei_tour.fragment.webView.WebViewFragment"
+        android:name="com.leodemo.taipei_tour.ui.fragment.webView.WebViewFragment"
         android:label="WebViewFragment" />
 
 </navigation>

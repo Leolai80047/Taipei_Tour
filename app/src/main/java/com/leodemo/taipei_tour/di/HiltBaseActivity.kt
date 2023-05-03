@@ -4,5 +4,5 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-abstract class HiltBaseActivity: AppCompatActivity() {
+abstract class HiltBaseActivity : AppCompatActivity() {
 }

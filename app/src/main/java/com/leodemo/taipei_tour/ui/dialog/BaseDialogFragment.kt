@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour.dialog
+package com.leodemo.taipei_tour.ui.dialog
 
 import android.content.res.Resources
 import android.graphics.Rect
@@ -43,7 +43,7 @@ abstract class BaseDialogFragment<T : ViewDataBinding>(
 
     open fun setPercentWidth(widthPercent: Float) {
         val dm = Resources.getSystem().displayMetrics
-        val rect = Rect(0,0, dm.widthPixels, dm.heightPixels)
+        val rect = Rect(0, 0, dm.widthPixels, dm.heightPixels)
         val width = rect.width() * widthPercent
         dialog?.window?.setLayout(width.toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
     }

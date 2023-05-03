@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour.fragment.attraction.adapter
+package com.leodemo.taipei_tour.ui.fragment.attraction.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

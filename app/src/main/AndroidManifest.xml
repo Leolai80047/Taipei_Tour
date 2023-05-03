@@ -16,7 +16,7 @@
         android:theme="@style/Theme.TaipeiTour"
         tools:targetApi="33">
         <activity
-            android:name=".activity.main.MainActivity"
+            android:name=".ui.activity.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

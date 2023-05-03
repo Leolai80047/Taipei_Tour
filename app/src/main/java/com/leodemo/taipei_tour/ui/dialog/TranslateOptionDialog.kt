@@ -1,4 +1,4 @@
-package com.leodemo.taipei_tour.dialog
+package com.leodemo.taipei_tour.ui.dialog
 
 import android.os.Bundle
 import android.view.View
