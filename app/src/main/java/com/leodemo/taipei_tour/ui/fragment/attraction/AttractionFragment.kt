@@ -62,6 +62,7 @@ class AttractionFragment : BaseFragment<FragmentAttractionBinding, AttractionVie
                 translateOptionDialog?.show()
             }
         }
+        binding.toolbar.tvTitle.text = localizeContext.getString(R.string.app_name)
     }
 
     private fun initView() {

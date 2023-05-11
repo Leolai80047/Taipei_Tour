@@ -59,7 +59,6 @@ class LocaleUtil {
             } else {
                 val config = getLocalizeConfiguration(lastLocale)
                 baseContext.createConfigurationContext(config)
-                baseContext
             }
         }
 

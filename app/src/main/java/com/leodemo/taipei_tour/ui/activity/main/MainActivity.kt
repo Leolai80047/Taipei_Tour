@@ -2,6 +2,7 @@ package com.leodemo.taipei_tour.ui.activity.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.navigation.findNavController
 import com.leodemo.taipei_tour.R
 import com.leodemo.taipei_tour.databinding.ActivityMainBinding
 import com.leodemo.taipei_tour.ui.activity.base.BaseActivity
@@ -17,14 +18,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         initObserver()
     }
 
-    private fun recreateSmooth() {
-        finish()
-        startActivity(intent)
+    private fun recreateFragment() {
+        val navController = findNavController(R.id.nav_host_fragment)
+        navController.popBackStack(R.id.attractionFragment, true)
+        navController.navigate(R.id.attractionFragment)
     }
 
     private fun initObserver() {
         viewModel.restartActivity.observe(this, EventObserver {
-            recreateSmooth()
+            recreateFragment()
         })
     }
 }

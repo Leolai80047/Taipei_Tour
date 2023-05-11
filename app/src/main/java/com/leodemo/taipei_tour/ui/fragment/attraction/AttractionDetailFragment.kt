@@ -37,12 +37,13 @@ class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding, A
                 findNavController().popBackStack()
             }
         }
+        binding.toolbar.tvTitle.text = localizeContext.getString(R.string.app_name)
     }
 
     private fun initView() {
         activityViewModel.selectAttractionData.value?.apply {
-            val concatAddress = "${getString(R.string.address)}\n${address}"
-            val concatDate = "${getString(R.string.last_update_time)}\n${modified}"
+            val concatAddress = "${localizeContext.getString(R.string.address)}\n${address}"
+            val concatDate = "${localizeContext.getString(R.string.last_update_time)}\n${modified}"
             val underlineUrl = "<u>${url}</u>"
             Glide.with(binding.root)
                 .load(getImage())

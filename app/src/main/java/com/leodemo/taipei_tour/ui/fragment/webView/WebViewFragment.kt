@@ -29,6 +29,7 @@ class WebViewFragment : BaseFragment<FragmentWebviewBinding, WebViewViewModel>()
                 findNavController().popBackStack()
             }
         }
+        binding.toolbar.tvTitle.text = localizeContext.getString(R.string.app_name)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
